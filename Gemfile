@@ -6,8 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby '2.3.3'
+# ruby '2.3.3'
 gem 'rails', '~> 5.1.5'
+gem 'mysql2'    #, '~> 0.5.1'
 gem "heroku-forward"
 # Use mysql as the database for Active Record
 # gem 'mysql2', '>= 0.3.18', '< 0.5'
@@ -44,9 +45,16 @@ gem 'bullet'
 gem 'gretel'
 gem "chartkick"
 gem 'slim-rails'
+# これないとダメ？
+gem 'wdm'
+gem 'eventmachine', '1.0.9.1'
+gem 'reveal-ck'
+gem 'win32console'
+gem 'compass-rails', github: 'Compass/compass-rails'
+gem 'tzinfo-data'
 
 group :development, :test do
-  gem 'mysql2', '>= 0.3.18', '< 0.5'
+  # gem 'mysql2', '>= 0.3.18', '< 0.5'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver

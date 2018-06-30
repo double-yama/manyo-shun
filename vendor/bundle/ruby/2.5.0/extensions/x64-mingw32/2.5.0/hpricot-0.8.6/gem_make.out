@@ -1,0 +1,22 @@
+current directory: D:/dev/rails/manyo-shun/vendor/bundle/ruby/2.5.0/gems/hpricot-0.8.6/ext/hpricot_scan
+C:/Ruby25-x64/bin/ruby.exe -r ./siteconf20180629-16876-1xlonya.rb extconf.rb
+checking for main() in -lc... no
+creating Makefile
+
+current directory: D:/dev/rails/manyo-shun/vendor/bundle/ruby/2.5.0/gems/hpricot-0.8.6/ext/hpricot_scan
+make "DESTDIR=" clean
+
+current directory: D:/dev/rails/manyo-shun/vendor/bundle/ruby/2.5.0/gems/hpricot-0.8.6/ext/hpricot_scan
+make "DESTDIR="
+generating hpricot_scan-x64-mingw32.def
+compiling hpricot_css.c
+hpricot_css.c: In function 'hpricot_css':
+hpricot_css.c:3407:9: warning: comparison between pointer and integer
+  if ( p == eof )
+         ^~
+compiling hpricot_scan.c
+linking shared-object hpricot_scan.so
+
+current directory: D:/dev/rails/manyo-shun/vendor/bundle/ruby/2.5.0/gems/hpricot-0.8.6/ext/hpricot_scan
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 hpricot_scan.so ./.gem.20180629-16876-18rgw7

@@ -1,0 +1,89 @@
+#!/usr/bin/env ruby
+require 'gli'
+require 'reveal-ck'
+
+class RevealCKExecutable
+  extend GLI::App
+  extend RevealCK::Misc::RemoveExtension
+
+  program_desc 'A reveal.js construction kit'
+
+  version RevealCK::VERSION
+
+  desc 'Generate reveal.js slides'
+  command :generate do |c|
+    default_file = FileList['slides.*'].first
+    c.desc 'The file containing your slide content'
+    c.flag %i[f file], default_value: default_file
+
+    c.desc 'The directory for generated slides. Default based on slide file.'
+    c.flag %i[d dir]
+
+    c.action do |_, options, _|
+      slides_file = options[:file]
+      if slides_file.nil?
+        puts
+        puts 'Problem:'
+        puts
+        puts '  reveal-ck could not find a slides file, and it cannnot build'
+        puts '  your presentation without one.'
+        puts
+        puts '  It thinks anything that matches "slides.*" is a slides file.'
+        puts
+        puts '  Some examples are: slides.md, slides.html, slides.haml'
+        puts
+        msg = 'Create a file matching slides.* to proceed, such as slides.md.'
+        exit_now!(msg)
+      end
+      slides_dir = options[:dir] || remove_extension(options[:file])
+
+      generate_args = {
+        user_dir: Dir.pwd,
+        gem_dir: RevealCK.path,
+        output_dir: slides_dir,
+        slides_file: slides_file
+      }
+      RevealCK::Commands::Generate.new(generate_args).run
+    end
+  end
+
+  desc 'Start webserver so slides are available via http'
+  command :serve, :server do |c|
+    default_file = FileList['slides.*'].first
+    c.desc 'The file containing your slide content'
+    c.flag %i[f file], default_value: default_file
+
+    c.desc 'The directory to serve up. Default is based on slide file.'
+    c.flag %i[d dir]
+
+    c.desc 'The port to serve on'
+    c.flag %i[p port], default_value: 10_000
+
+    c.desc 'The host to serve on'
+    c.flag %i[h host], default_value: 'localhost'
+
+    c.desc 'Exit after starting + n seconds (for testing only)'
+    c.flag ['test-quit-after-starting'], type: Integer
+
+    c.action do |_, options, _|
+      slides_dir = options[:dir] || remove_extension(options[:file])
+      serve_args = {
+        doc_root: slides_dir,
+        gem_dir: RevealCK.path,
+        output_dir: slides_dir,
+        port: options[:port],
+        host: options[:host],
+        slides_file: options[:file],
+        user_dir: Dir.pwd
+      }
+      if options['test-quit-after-starting']
+        Thread.new do
+          sleep options['test-quit-after-starting']
+          exit
+        end
+      end
+      RevealCK::Commands::Serve.new(serve_args).run
+    end
+  end
+  exit run(ARGV)
+end

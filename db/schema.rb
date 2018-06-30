@@ -35,18 +35,9 @@ ActiveRecord::Schema.define(version: 20180601005559) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "task_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "task_id"
-    t.bigint "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_task_groups_on_group_id"
-    t.index ["task_id"], name: "index_task_groups_on_task_id"
-  end
-
   create_table "task_labels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "task_id"
-    t.bigint "label_id"
+    t.integer "task_id"
+    t.integer "label_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["label_id"], name: "index_task_labels_on_label_id"
@@ -62,9 +53,7 @@ ActiveRecord::Schema.define(version: 20180601005559) do
     t.integer "status"
     t.integer "priority"
     t.integer "user_id"
-    t.string "label"
     t.boolean "read_flg", default: false
-    t.string "file"
     t.integer "group_id"
     t.index ["user_id", "name", "period"], name: "index_tasks_on_user_id_and_name_and_period"
   end
@@ -80,8 +69,4 @@ ActiveRecord::Schema.define(version: 20180601005559) do
 
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
-  add_foreign_key "task_groups", "groups"
-  add_foreign_key "task_groups", "tasks"
-  add_foreign_key "task_labels", "labels"
-  add_foreign_key "task_labels", "tasks"
 end

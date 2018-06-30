@@ -1,0 +1,20 @@
+current directory: D:/dev/rails/manyo-shun/vendor/bundle/ruby/2.5.0/gems/rinku-2.0.2/ext/rinku
+C:/Ruby25-x64/bin/ruby.exe -r ./siteconf20180629-7028-1d0sptl.rb extconf.rb
+creating Makefile
+
+current directory: D:/dev/rails/manyo-shun/vendor/bundle/ruby/2.5.0/gems/rinku-2.0.2/ext/rinku
+make "DESTDIR=" clean
+
+current directory: D:/dev/rails/manyo-shun/vendor/bundle/ruby/2.5.0/gems/rinku-2.0.2/ext/rinku
+make "DESTDIR="
+generating rinku-x64-mingw32.def
+compiling autolink.c
+compiling buffer.c
+compiling rinku.c
+compiling rinku_rb.c
+compiling utf8.c
+linking shared-object rinku.so
+
+current directory: D:/dev/rails/manyo-shun/vendor/bundle/ruby/2.5.0/gems/rinku-2.0.2/ext/rinku
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 rinku.so ./.gem.20180629-7028-me8szt
